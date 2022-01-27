@@ -18,18 +18,18 @@ It opl's the SFM file on the record marker making the following arrays:
 			means that line #290 will be the \lx line of the 55th record
 
 It grinds over the opl'ed file building 3 hashes on the contents of the above fields:
-	* %hmcount - the number of occurences of the word
+	* %hmcount contains the number of occurences of the word
 		* i.e. $hmcount{'someword'} is the no. of times 'someword' exists in the fields
-	* %largesthm - the largest homograph number for the word in the file
+	* %largesthm contains the largest homograph number for the word in the file
 		* i.e. $largesthm{'someword'} == 6
 			means that 6  'someword6' or '\lx someword#\hm 6' exists somewhere and 7 doesn't
-	* %hmlocation - record#<tab>field# indexed on <word><tab><hm#>
+	* %hmlocation contains record#<tab>field# indexed on <word><tab><hm#>
 		* if the hm# is in the text, use that
 		* otherwise hm# is numbered sequentially down from UNASSIGNED (9999)
 		* i.e. if $recordindex[456] == 8329
-		* $hmlocation('someword<tab>3') == '456<tab>12' )
+		* $hmlocation{'someword<tab>3'} == '456<tab>12'
 			means that line #8340 (8329+12, 0 index) is '\xx someword3' (\xx is \va or \se, etc.)
-		* $hmlocation('someotherword<tab>9997') == '456<tab>24' )
+		* $hmlocation{'someotherword<tab>9997'} == '456<tab>24'
 			means that line #8352 (8329+24, 0 index) is '\xx someotherword'
 			and that there have been 2 other '\xx someotherword" fields before it (9999 &9998)
 To parse \lx field for homograph
