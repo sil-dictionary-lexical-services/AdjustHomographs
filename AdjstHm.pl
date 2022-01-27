@@ -88,6 +88,8 @@ GetOptions (
 	'debug'       => \my $debug,
 	) or die $USAGE;
 
+open(my $LOGFILE, '>', $logfilename)
+	or die "Could not open file '$logfilename' $!";
 
 say STDERR "inisection:$inisection" if $debug;
 
