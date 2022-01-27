@@ -142,7 +142,14 @@ while (<>) {
 		push @recordindex, $NR;
 		$line = $_;
 		}
-	else { $line .= $_ }
+	elsif (/^\\$hmmark /) {
+		if (! /^\\$hmmark \d+#/) {
+			s/\\$hmmark/\\${hmmark}bad/;
+			say $LOGFILE "Bad homograph number, changing the SFM on line $.:$_";
+			}
+		 $line .= $_ ;
+		}
+	else { $line .= $_  }
 	}
 push @opledfile_in, $line;
 push @recordindex, $NR;
