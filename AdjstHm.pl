@@ -168,4 +168,25 @@ say @opledfile_in if $debug;
 say "size index:", scalar @recordindex  if $debug;
 print Dumper(@recordindex) if $debug;
 
+
+sub update_hmhashes {
+# updates  %hmcount, %largesthm, %hmlocation
+my ($form, $hmvalue, $recnumber, $fieldnumber) = @_;
+if (! exists $hmcount{$form}) {
+	$hmcount{$form}=1;
+	}
+else {$hmcount{$form}++}
+
+if ($hmvalue) {
+	if (! exists $largesthm{$form} || ($largesthm{$form} < $hmvalue)) {
+		 $largesthm{$form} = $hmvalue;
+		}
+	$hmlocation{"$form\t$hmvalue"} = "$recnumber\t$fieldnumber";
+	}
+else {
+	my $newvalue;
+	for ($newvalue = $UNASSIGNED; exists $hmlocation{"$form\t$newvalue"}; $newvalue--) {};
+	$hmlocation{"$form\t$newvalue"} = "$recnumber\t$fieldnumber";
+	}
+}
 # 
