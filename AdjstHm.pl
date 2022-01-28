@@ -124,6 +124,7 @@ say STDERR "subentry marks Match: $srchSEmarks" if $debug;
 say STDERR "variant marks Match: $srchVAmarks" if $debug;
 say STDERR "citation mark:$lcmark" if $debug;
 
+my $UNASSIGNED = 99999;
 
 # generate array of the input file with one SFM record per line (opl)
 my @opledfile_in;
