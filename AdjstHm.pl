@@ -142,10 +142,19 @@ while (<>) {
 		push @recordindex, $NR;
 		$line = $_;
 		}
-	elsif (/^\\$hmmark /) {
-		if (! /^\\$hmmark \d+#/) {
+	elsif (/^\\$hmmark (.*?)#/) {
+		my $hmvalue = $1;
+		if (! $hmvalue) {
 			s/\\$hmmark/\\${hmmark}bad/;
-			say $LOGFILE "Bad homograph number, changing the SFM on line $.:$_";
+			say $LOGFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
+			}
+		elsif (! $hmvalue =~  m/ \d+/) {
+			s/\\$hmmark/\\${hmmark}bad/;
+			say $LOGFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
+			}
+		elsif (! $hmvalue > ($UNASSIGNED-10000) {
+			s/\\$hmmark/\\${hmmark}bad/;
+			say $LOGFILE "Bad homograph number (too big), changing the SFM on line $.:$_";
 			}
 		 $line .= $_ ;
 		}
