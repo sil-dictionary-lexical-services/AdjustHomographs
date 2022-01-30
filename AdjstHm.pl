@@ -163,7 +163,9 @@ while (<>) {
 push @opledfile_in, $line;
 push @recordindex, $NR;
 
-say "size opl:", scalar @opledfile_in if $debug;
+my $sizeopl = scalar @opledfile_in;
+say STDERR "size opl:", $sizeopl if $debug;
+
 say @opledfile_in if $debug;
 say "size index:", scalar @recordindex  if $debug;
 print Dumper(@recordindex) if $debug;
