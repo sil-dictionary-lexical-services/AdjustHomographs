@@ -166,9 +166,10 @@ push @recordindex, $NR;
 my $sizeopl = scalar @opledfile_in;
 say STDERR "size opl:", $sizeopl if $debug;
 
-say @opledfile_in if $debug;
-say "size index:", scalar @recordindex  if $debug;
-print Dumper(@recordindex) if $debug;
+say STDERR @opledfile_in if $debug;
+say STDERR "size index:", scalar @recordindex  if $debug;
+print STDERR Dumper(@recordindex) if $debug;
+
 
 
 sub update_hmhashes {
