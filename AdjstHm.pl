@@ -189,6 +189,20 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 	update_hmhashes($form, $hmvalue, $oplindex, 0); # \lx field# is always 0
 
 	# \se, \sec etc
+	while ($oplline =~  m/\\$srchSEmarks ([^#]*)#/g) {
+		my $prevfields = $PREMATCH;
+		my $fieldcontents = $1;
+		my $prevfieldcount = () = $prevfields =~  m/(^|#)\\/g;
+		say STDERR "leading sfm count:$prevfieldcount" if $debug;
+		say STDERR "fieldcontents:$fieldcontents" if $debug;
+		$hmvalue = "";
+		$form = $fieldcontents;
+		if  ($fieldcontents =~  m/(.*?)(\d+$)/) {
+			$form = $1;
+			$hmvalue = $2;
+			}
+		update_hmhashes($form, $hmvalue, $oplindex, $prevfieldcount);
+		}
 
 
 	# perhaps \va etc can go here too
