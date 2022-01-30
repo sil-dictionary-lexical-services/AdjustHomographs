@@ -143,16 +143,16 @@ while (<>) {
 		$line = $_;
 		}
 	elsif (/^\\$hmmark (.*?)#/) {
-		my $hmvalue = $1;
-		if (! $hmvalue) {
+		my $hmval = $1;
+		if (! $hmval) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $LOGFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
 			}
-		elsif (! $hmvalue =~  m/ \d+/) {
+		elsif (! $hmval =~  m/ \d+/) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $LOGFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
 			}
-		elsif (! $hmvalue > ($UNASSIGNED-10000) {
+		elsif (($hmval+0) > ($UNASSIGNED-10000)) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $LOGFILE "Bad homograph number (too big), changing the SFM on line $.:$_";
 			}
