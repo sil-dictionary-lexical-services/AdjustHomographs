@@ -170,6 +170,34 @@ say STDERR @opledfile_in if $debug;
 say STDERR "size index:", scalar @recordindex  if $debug;
 print STDERR Dumper(@recordindex) if $debug;
 
+my %hmcount;
+my %largesthm;
+my %hmlocation;
+for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
+	my $oplline = $opledfile_in[$oplindex];
+	next if ! ($oplline =~  m/\\$recmark /); # e.g. Shoebox header line
+
+	# \lx field
+	$oplline =~  m/(^\\$recmark ([^#]+)#)/;
+	say STDERR "lxfield: ", $1 if $debug;
+	my $form=$2;
+	my $hmvalue="";
+	if  ($oplline =~  m/\\$hmmark ([^#]+)#/) {
+		$hmvalue = $1;
+		}
+	say STDERR "hmvalue: ", $hmvalue if $debug;
+	update_hmhashes($form, $hmvalue, $oplindex, 0); # \lx field# is always 0
+
+	# \se, \sec etc
+
+
+	# perhaps \va etc can go here too
+	# loop through the matching fields and update_hmhashes() them too
+
+	}
+say STDERR "hmcount: ", Dumper \%hmcount if $debug;
+say STDERR "largesthm: ", Dumper \%largesthm if $debug;
+say STDERR "hmlocation : ", Dumper \%hmlocation if $debug;
 
 
 sub update_hmhashes {
