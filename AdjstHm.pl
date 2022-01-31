@@ -189,6 +189,7 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 	update_hmhashes($form, $hmvalue, $oplindex, 0); # \lx field# is always 0
 
 	# \se, \sec etc
+	# \va etc too
 	while ($oplline =~  m/\\($srchSEmarks|$srchVAmarks) ([^#]*)#/g) {
 		my $prevfields = $PREMATCH;
 		my $sfmmark = $1;
@@ -204,10 +205,6 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 			}
 		update_hmhashes($form, $hmvalue, $oplindex, $prevfieldcount);
 		}
-
-
-	# perhaps \va etc can go here too
-	# loop through the matching fields and update_hmhashes() them too
 
 	}
 say STDERR "hmcount: ", Dumper \%hmcount if $debug;
