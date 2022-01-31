@@ -207,10 +207,29 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 		}
 
 	}
+
+foreach my $form (keys %hmcount) {
+	next if $hmcount{$form} == 1; # only one homograph leave it empty
+	my $newvalue = $UNASSIGNED;
+	my $newmax = 1;
+	$newmax = $largesthm{$form}+1 if exists $largesthm{$form};
+	while (exists $hmlocation{"$form\t$newvalue"}) {
+		my ($recno, $fieldno) = split (/\t/, $hmlocation{"$form\t$newvalue"});
+		if  ($fieldno) { #embedded hm eg \va form99
+			my $fcount=0;
+			$opledfile_in[$recno] =~ s/(#\\)/$fcount++==$fieldno ? $newmax . $1 : $1 /ge;
+			}
+		else {# \lx with \hm 99
+			$opledfile_in[$recno] =~ s/#/__hm__$newmax#/;
+			}
+		$newmax++;
+		$newvalue--;
+		};
+	}
+
 say STDERR "hmcount: ", Dumper \%hmcount if $debug;
 say STDERR "largesthm: ", Dumper \%largesthm if $debug;
 say STDERR "hmlocation : ", Dumper \%hmlocation if $debug;
-
 
 sub update_hmhashes {
 # updates  %hmcount, %largesthm, %hmlocation
