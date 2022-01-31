@@ -231,6 +231,15 @@ say STDERR "hmcount: ", Dumper \%hmcount if $debug;
 say STDERR "largesthm: ", Dumper \%largesthm if $debug;
 say STDERR "hmlocation : ", Dumper \%hmlocation if $debug;
 
+ for my $oplline (@opledfile_in) {
+	 for ($oplline) {
+		s/__hm__/#\\hm /; # feeds the next substitution
+		s/#/\n/g;
+		s/\_\_hash\_\_/#/g;
+		 print;
+		}
+	}
+
 sub update_hmhashes {
 # updates  %hmcount, %largesthm, %hmlocation
 my ($form, $hmvalue, $recnumber, $fieldnumber) = @_;
@@ -251,4 +260,3 @@ else {
 	$hmlocation{"$form\t$newvalue"} = "$recnumber\t$fieldnumber";
 	}
 }
-# 
