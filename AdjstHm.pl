@@ -166,7 +166,7 @@ push @recordindex, $NR;
 my $sizeopl = scalar @opledfile_in;
 say STDERR "size opl:", $sizeopl if $debug;
 
-say STDERR @opledfile_in if $debug;
+#say STDERR @opledfile_in if $debug;
 say STDERR "size index:", scalar @recordindex  if $debug;
 print STDERR Dumper(@recordindex) if $debug;
 
