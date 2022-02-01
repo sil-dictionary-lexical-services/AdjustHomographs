@@ -181,12 +181,15 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 	$oplline =~  m/(^\\$recmark ([^#]+)#)/;
 	say STDERR "lxfield: ", $1 if $debug;
 	my $form=$2;
+	if ($oplline =~  m/#(\\$lcmark ([^#]+)#)/) {
+		$form=$2;
+		}
 	my $hmvalue="";
 	if  ($oplline =~  m/\\$hmmark ([^#]+)#/) {
 		$hmvalue = $1;
 		}
 	say STDERR "hmvalue: ", $hmvalue if $debug;
-	update_hmhashes($form, $hmvalue, $oplindex, 0); # \lx field# is always 0
+	update_hmhashes($form, $hmvalue, $oplindex, 0); # \lx & \lc field# is always 0
 
 	# \se, \sec etc
 	# \va etc too
