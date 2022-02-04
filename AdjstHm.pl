@@ -103,6 +103,7 @@ my $lcmark;
 if ($config) {
 	$recmark = $config->{"$inisection"}->{recmark};
 	$hmmark = $config->{"$inisection"}->{hmmark};
+	$lcmark = $config->{"$inisection"}->{lcmark};
 	my $semarks = $config->{"$inisection"}->{semarks};	
 	$semarks  =~ s/\,*$//; # no trailing commas
 	$semarks  =~ s/ //g;  # no spaces
@@ -113,7 +114,6 @@ if ($config) {
 	$vamarks  =~ s/ //g;  # no spaces
 	$vamarks  =~ s/\,/\|/g;  # use bars for or'ing
 	$srchVAmarks = qr/$vamarks/;
-	$lcmark = $config->{"$inisection"}->{lcmark};
 	}
 else {
 	die  "Couldn't find the INI file: $inifilename\n";
