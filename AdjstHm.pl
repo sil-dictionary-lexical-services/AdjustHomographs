@@ -83,10 +83,16 @@ GetOptions (
 	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
 	'section:s'   => \(my $inisection = "AdjstHm"), # section of ini file to use
 	'logfile:s'   => \(my $logfilename = "$scriptname.log"), # log filename
+	'help'    => \my $help,
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
 	'debug'       => \my $debug,
 	) or die $USAGE;
+if ($help) {
+	say STDERR $USAGE;
+	exit;
+	}
+
 
 open(my $LOGFILE, '>', $logfilename)
 	or die "Could not open file '$logfilename' $!";
