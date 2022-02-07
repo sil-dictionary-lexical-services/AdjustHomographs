@@ -152,7 +152,7 @@ while (<>) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $LOGFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
 			}
-		elsif (($hmval+0) > ($UNASSIGNED-10000)) {
+		elsif (($hmval+0) > ($UNASSIGNED-9999)) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $LOGFILE "Bad homograph number (too big), changing the SFM on line $.:$_";
 			}
