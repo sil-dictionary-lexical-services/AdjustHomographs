@@ -120,11 +120,11 @@ if ($config) {
 		s/\\//g;
 		s/ //g;
 		}
-	$semarks  =~ s/\,*$//; # no trailing commas
-	$semarks  =~ s/\,/\|/g;  # use bars for or'ing
+	for ($semarks, $vamarks) {
+		s/\,*$//; # no trailing commas
+		s/\,/\|/g;  # use bars for or'ing
+		}
 	$srchSEmarks = qr/$semarks/;
-	$vamarks  =~ s/\,*$//; # no trailing commas
-	$vamarks  =~ s/\,/\|/g;  # use bars for or'ing
 	$srchVAmarks = qr/$vamarks/;
 	}
 else {
