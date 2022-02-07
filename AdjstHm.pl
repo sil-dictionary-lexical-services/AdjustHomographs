@@ -112,14 +112,18 @@ if ($config) {
 	$recmark = $config->{"$inisection"}->{recmark};
 	$hmmark = $config->{"$inisection"}->{hmmark};
 	$lcmark = $config->{"$inisection"}->{lcmark};
-	my $semarks = $config->{"$inisection"}->{semarks};	
+	my $semarks = $config->{"$inisection"}->{semarks};
+	my $vamarks = $config->{"$inisection"}->{vamarks};
+	for ($recmark, $hmmark, $lcmark, $semarks,$vamarks) {
+		# remove backslashes and spaces from the SFMs in the INI file
+		say STDERR $_ if $debug;
+		s/\\//g;
+		s/ //g;
+		}
 	$semarks  =~ s/\,*$//; # no trailing commas
-	$semarks  =~ s/ //g;  # no spaces
 	$semarks  =~ s/\,/\|/g;  # use bars for or'ing
 	$srchSEmarks = qr/$semarks/;
-	my $vamarks = $config->{"$inisection"}->{vamarks};
 	$vamarks  =~ s/\,*$//; # no trailing commas
-	$vamarks  =~ s/ //g;  # no spaces
 	$vamarks  =~ s/\,/\|/g;  # use bars for or'ing
 	$srchVAmarks = qr/$vamarks/;
 	}
