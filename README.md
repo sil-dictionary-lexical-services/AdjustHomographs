@@ -5,7 +5,7 @@ The main script in this repo is **AdjustHm.pl.** It goes through various fields 
 
 ## Running the script
 
-Edit the .**INI** file to say which SFMs are used to mark records and fields that can contain homographs. A model **.INI** file, **AdjstHm.ini** is included with the repo and is explained below. 
+Edit the .**INI** file to say which SFMs are used to mark records and fields that can contain homographs. A model **.INI** file, **AdjstHm.ini** is included with the repo and is explained below.
 
 If you use WSL, make sure the script has Linux line endings. The script will correctly read SFM and .INI files that have Windows line endings. The output file will contain Linux line endings.
 
@@ -24,8 +24,6 @@ $ ./AdjstHm.pl --help
 Usage: ./AdjstHm.pl [--inifile AdjstHm.ini] [--section section] [--logfile AdjstHm.log] [--debug] [file.sfm]
 A script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.
 ````
-
-The script detects homograph fields that are invalid (because they don't have a number) or contain a homograph number greater than 90000. It logs them to the log file. Line numbers in the log file refer to the line number in the input file, which may be different from the output file.
 
 ## How homographs are marked
 
@@ -98,7 +96,7 @@ Only a single SFM can be used for the following field types
 2. homograph field (\hm)
 3. citation form (\lc)
 
-Subentries (\se\*) and variants (\va) can have more than one SFM to indicate its type. Multiple values are separated by commas. 
+Subentries (\se\*) and variants (\va) can have more than one SFM to indicate its type. Multiple values are separated by commas.
 
 The lexical form field is searched for homographs. See below how that is affected by citation forms.
 
@@ -115,6 +113,12 @@ When the script has assigned the homograph numbers, it breaks the records back i
 ## How citation forms affect the numbering
 
 If the entry has a citation form (e.g., **\lc**), that form is used instead of the one in the lexical field (e.g. **\lx**). In that case, the contents of the **\lx** field aren't included in the count for homographs in other entries. If there is an **\hm** number in the record already, it will be used as the homograph number when calculating numbers for other entries that match the citation form.
+
+## Reporting homograph numbering errors in the log file
+
+The script detects homograph fields that are invalid (because they don't have a number) or contain a homograph number greater than 90000. It logs them to the log file. Line numbers in the log file refer to the line number in the input file, which may be different from the output file.
+
+If the script detects that a homograph number has been assigned twice, It reports the form and line number of the two occurrences. Note that in the case of a lexical form or a citation form, the form and the homograph field will be on different lines.
 
 ## Bugs & Enhancements
 

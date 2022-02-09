@@ -267,7 +267,14 @@ if ($hmvalue) {
 	if (! exists $largesthm{$form} || ($largesthm{$form} < $hmvalue)) {
 		 $largesthm{$form} = $hmvalue;
 		}
-	$hmlocation{"$form\t$hmvalue"} = "$recnumber\t$fieldnumber";
+	if (exists $hmlocation{"$form\t$hmvalue"}) {
+		my ($clashrec, $clashfield) = split (/\t/, $hmlocation{"$form\t$hmvalue"});
+		my $clashline = $recordindex[$clashrec-1]+$clashfield;
+		say $LOGFILE qq[Homograph #$hmvalue of the form "$form" on line $clashline is also assigned to the form on line ], $recordindex[$recnumber-1]+$fieldnumber;
+		}
+	else {
+		$hmlocation{"$form\t$hmvalue"} = "$recnumber\t$fieldnumber";
+		}
 	}
 else {
 	my $newvalue;
