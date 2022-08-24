@@ -114,6 +114,7 @@ if ($config) {
 	$lcmark = $config->{"$inisection"}->{lcmark};
 	my $semarks = $config->{"$inisection"}->{semarks};
 	my $vamarks = $config->{"$inisection"}->{vamarks};
+	$vamarks = "\N{INVERTED QUESTION MARK}\N{INVERTED QUESTION MARK}" if ! $vamarks; # should never match
 	for ($recmark, $hmmark, $lcmark, $semarks,$vamarks) {
 		# remove backslashes and spaces from the SFMs in the INI file
 		say STDERR $_ if $debug;
