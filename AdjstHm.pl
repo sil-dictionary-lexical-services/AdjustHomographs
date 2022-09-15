@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--logfile logfile.log] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--errfile errfile.log] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
 =pod
 This script checks for multiple instances of homographs and assigns homograph numbers to entries, subentries (complex forms) and variants that occur more than once.
 
@@ -78,13 +78,13 @@ use Data::Dumper qw(Dumper);
 use File::Basename;
 my $scriptname = fileparse($0, qr/\.[^.]*/); # script name without the .pl
 $USAGE =~ s/inifile\./$scriptname\./;
-$USAGE =~ s/logfile\./$scriptname\./;
+$USAGE =~ s/errfile\./$scriptname\./;
 
 use Getopt::Long;
 GetOptions (
 	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
 	'section:s'   => \(my $inisection = "AdjstHm"), # section of ini file to use
-	'logfile:s'   => \(my $logfilename = "$scriptname.log"), # log filename
+	'errfile:s'   => \(my $errfilename = "$scriptname.err"), # log filename
 	'help'    => \my $help,
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
@@ -96,8 +96,8 @@ if ($help) {
 	}
 
 
-open(my $LOGFILE, '>', $logfilename)
-	or die "Could not open file '$logfilename' $!";
+open(my $ERRFILE, '>', $errfilename)
+	or die "Could not open file '$errfilename' $!";
 
 say STDERR "inisection:$inisection" if $debug;
 
@@ -159,15 +159,15 @@ while (<>) {
 		my $hmval = $1;
 		if (! $hmval) {
 			s/\\$hmmark/\\${hmmark}bad/;
-			say $LOGFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
+			say $ERRFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
 			}
 		elsif (! $hmval =~  m/ \d+/) {
 			s/\\$hmmark/\\${hmmark}bad/;
-			say $LOGFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
+			say $ERRFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
 			}
 		elsif (($hmval+0) > ($UNASSIGNED-9999)) {
 			s/\\$hmmark/\\${hmmark}bad/;
-			say $LOGFILE "Bad homograph number (too big), changing the SFM on line $.:$_";
+			say $ERRFILE "Bad homograph number (too big), changing the SFM on line $.:$_";
 			}
 		 $line .= $_ ;
 		}
@@ -271,7 +271,7 @@ if ($hmvalue) {
 	if (exists $hmlocation{"$form\t$hmvalue"}) {
 		my ($clashrec, $clashfield) = split (/\t/, $hmlocation{"$form\t$hmvalue"});
 		my $clashline = $recordindex[$clashrec-1]+$clashfield;
-		say $LOGFILE qq[Homograph #$hmvalue of the form "$form" on line $clashline is also assigned to the form on line ], $recordindex[$recnumber-1]+$fieldnumber;
+		say $ERRFILE qq[Homograph #$hmvalue of the form "$form" on line $clashline is also assigned to the form on line ], $recordindex[$recnumber-1]+$fieldnumber;
 		}
 	else {
 		$hmlocation{"$form\t$hmvalue"} = "$recnumber\t$fieldnumber";
