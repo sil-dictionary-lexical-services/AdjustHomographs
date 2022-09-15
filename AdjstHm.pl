@@ -45,7 +45,7 @@ To parse \se* fields for homograph
 To parse \va* for homograph
 	* same as \se
 
-Assign unassigned numbers 
+Assign unassigned numbers
 	grind through %hmcount hash
 		if current $hmcount > 1
 			count down from 9999 until no hit
@@ -146,7 +146,7 @@ my @recordindex;
 my $line = ""; # accumulated SFM record
 my $linecount = 0 ;
 while (<>) {
-	s/\R//g; # chomp that doesn't care about Linux & Windows 
+	s/\R//g; # chomp that doesn't care about Linux & Windows
 	s/#/\_\_hash\_\_/g;
 	$_ .= "#";
 	if (/^\\$recmark /) {
@@ -161,13 +161,9 @@ while (<>) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $ERRFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
 			}
-		elsif (! $hmval =~  m/ \d+/) {
+		elsif (!($hmval =~  m/ \d+/)) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $ERRFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
-			}
-		elsif (($hmval+0) > ($UNASSIGNED-9999)) {
-			s/\\$hmmark/\\${hmmark}bad/;
-			say $ERRFILE "Bad homograph number (too big), changing the SFM on line $.:$_";
 			}
 		 $line .= $_ ;
 		}
