@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--errfile errfile.log] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--logfile logfile.log] [--errfile errfile.log] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
 =pod
 This script checks for multiple instances of homographs and assigns homograph numbers to entries, subentries (complex forms) and variants that occur more than once.
 
@@ -79,12 +79,14 @@ use File::Basename;
 my $scriptname = fileparse($0, qr/\.[^.]*/); # script name without the .pl
 $USAGE =~ s/inifile\./$scriptname\./;
 $USAGE =~ s/errfile\./$scriptname\./;
+$USAGE =~ s/logfile\./$scriptname\./;
 
 use Getopt::Long;
 GetOptions (
 	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
 	'section:s'   => \(my $inisection = "AdjstHm"), # section of ini file to use
-	'errfile:s'   => \(my $errfilename = "$scriptname.err"), # log filename
+	'errfile:s'   => \(my $errfilename = "$scriptname.err"), # Error filename
+	'logfile:s'   => \(my $logfilename = "$scriptname.log"), # log filename
 	'help'    => \my $help,
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
@@ -97,7 +99,10 @@ if ($help) {
 
 
 open(my $ERRFILE, '>', $errfilename)
-	or die "Could not open file '$errfilename' $!";
+	or die "Could not open Error file '$errfilename' $!";
+
+open(my $LOGFILE, '>', $logfilename)
+		or die "Could not open Log file '$logfilename' $!";
 
 say STDERR "inisection:$inisection" if $debug;
 
@@ -233,6 +238,7 @@ foreach my $form (keys %hmcount) {
 			}
 		else {# \lx with \hm 99
 			$opledfile_in[$recno] =~ s/#/__hm__$newmax#/;
+			say $LOGFILE "Record #:$recno ($form) was assigned a new homograph field \\hm $newmax";
 			}
 		$newmax++;
 		$newvalue--;
