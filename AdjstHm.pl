@@ -166,7 +166,7 @@ while (<>) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $ERRFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
 			}
-		elsif (!($hmval =~  m/ \d+/)) {
+		elsif (!($hmval =~  m/\d+/)) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $ERRFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
 			}
