@@ -8,6 +8,6 @@ dbname="${dbname:-adjust.sfm}"
 
 bkpdbname="${dbname%.*}.bkp" # replace extension with bkp
 refdbname="${dbname%.*}.ref" # replace extension with ref
-echo $dbname $bkpdbname $refdbname
+echo "Original:$bkpdbname Reference Flagged:$refdbname Modified:$dbname"
 cp $dbname $bkpdbname
 perl -pf opl.pl $bkpdbname |./FlagseReF.pl |perl -pf de_opl.pl |tee $refdbname |./AdjstHm.pl |perl -pE 's/^\\REF/\\/' >$dbname
