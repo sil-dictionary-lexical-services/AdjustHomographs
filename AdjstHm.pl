@@ -238,11 +238,11 @@ foreach my $form (keys %hmcount) {
 			$opledfile_in[$recno] =~ m/[^\ ]*\ ([^#]*)/;
 			my $lxfield = $1;
 			my $fieldno_out =$fieldno+1; #display field number starting at 1 instead of 0
-			say $LOGFILE "Record #:$recno ($lxfield) Field #:$fieldno_out ($form$newmax) now has a homograph number";
+			say $LOGFILE "Record #$recno ($lxfield) Field #$fieldno_out ($form$newmax) now has a homograph number";
 			}
 		else {# \lx with \hm 99
 			$opledfile_in[$recno] =~ s/#/__hm__$newmax#/;
-			say $LOGFILE "Record #:$recno ($form) was assigned a new homograph field \\hm $newmax";
+			say $LOGFILE "Record #$recno ($form) now has a new homograph field \\hm $newmax";
 			}
 		$newmax++;
 		$newvalue--;
