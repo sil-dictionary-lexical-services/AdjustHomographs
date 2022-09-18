@@ -234,7 +234,7 @@ foreach my $form (keys %hmcount) {
 		my ($recno, $fieldno) = split (/\t/, $hmlocation{"$form\t$newvalue"});
 		if  ($fieldno) { #embedded hm eg \va form99
 			my $fcount=0;
-			$opledfile_in[$recno] =~ s/(#\\)/$fcount++==$fieldno ? $newmax . $1 : $1 /ge;
+			$opledfile_in[$recno] =~ s/(#+\\)/$fcount++==$fieldno ? $newmax . $1 : $1 /ge;
 			}
 		else {# \lx with \hm 99
 			$opledfile_in[$recno] =~ s/#/__hm__$newmax#/;
