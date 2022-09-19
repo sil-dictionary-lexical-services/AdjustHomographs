@@ -21,7 +21,7 @@ To see the possible arguments use the **--help** option:
 
 ````bash
 $ ./AdjstHm.pl --help
-Usage: ./AdjstHm.pl [--inifile AdjstHm.ini] [--section section] [--logfile AdjstHm.log] [--debug] [file.sfm]
+Usage: ./AdjstHm.pl [--inifile AdjstHm.ini] [--section section] [--logfile AdjstHm.log] [--errfile AdjstHm.err] [--debug] [file.sfm]
 A script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.
 ````
 
