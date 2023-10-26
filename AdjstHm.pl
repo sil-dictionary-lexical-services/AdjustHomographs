@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section AdjstHm] [--logfile logfile.log] [--errfile errfile.err] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
 =pod
 This script checks for multiple instances of homographs and assigns homograph numbers to entries, subentries (complex forms) and variants that occur more than once.
@@ -85,8 +86,8 @@ use Getopt::Long;
 GetOptions (
 	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
 	'section:s'   => \(my $inisection = "AdjstHm"), # section of ini file to use
-	'errfile:s'   => \(my $errfilename = "$scriptname.err"), # Error filename
-	'logfile:s'   => \(my $logfilename = "$scriptname.log"), # log filename
+	'errfile:s'   => \(my $errfilename = "$scriptname-err.txt"), # Error filename
+	'logfile:s'   => \(my $logfilename = "$scriptname-log.txt"), # log filename
 	'help'    => \my $help,
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
