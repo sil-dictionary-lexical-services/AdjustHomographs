@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--logfile logfile.log] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--logfile logfile.log] [--debug] [file.sfm]\nA script that checks an opl'd file for subentries that are references. Reference subentries are those that have no subfields.";
 =pod
 This script checks an opl'd file for subentries that are references.
 Reference subentries are those that have no subfields.
