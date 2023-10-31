@@ -11,9 +11,7 @@ If you use WSL, make sure the script has Linux line endings. The script will cor
 
 It's easiest to copy the script, your **.INI** file, and your SFM file into a working directory and navigate to that. The instructions below assume that they are in the current directory.
 
-You also need the utility scripts [oplsfm.pl](https://github.com/sil-dictionary-lexical-services/Opl_DeOpl/blob/master/oplsfm.pl) and [de_oplsfm.pl](https://github.com/sil-dictionary-lexical-services/Opl_DeOpl/blob/master/de_oplsfm.pl) in the same working directory, as well as the **AdjstHm.sh** file.
-
-(To run the sample data, copy these files into the **SampleData** folder.  Run the script as explained below.  Then compare the output files with the files that are in the **ExpectedOutput** folder there.)
+(To run the sample data, run the script as explained below.  Then compare the output files with the files that are in the **ExpectedOutput** folder there.)
 
 There are several steps to the process of running this script.  There are two ways to accomplish this.
 
