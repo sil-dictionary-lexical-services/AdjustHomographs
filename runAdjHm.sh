@@ -6,6 +6,10 @@
 # Collect input/output filenames from command line
 infilename=$1
 outfilename=$2
+if [ ! -f $infilename ] || [ -z $outfilename ]; then
+	echo -e "A script to assign homographs. Call it like this:\n$0 infile.db outfile.db"
+	exit
+	fi
 # The name of the main script, to use for constructing filenames
 scriptfilename="AdjstHm"
 # Construct ancillary filenames
