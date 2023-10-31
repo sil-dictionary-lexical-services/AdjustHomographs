@@ -11,9 +11,7 @@ If you use WSL, make sure the script has Linux line endings. The script will cor
 
 It's easiest to copy the script, your **.INI** file, and your SFM file into a working directory and navigate to that. The instructions below assume that they are in the current directory.
 
-You also need the utility scripts [oplsfm.pl](https://github.com/sil-dictionary-lexical-services/Opl_DeOpl/blob/master/oplsfm.pl) and [de_oplsfm.pl](https://github.com/sil-dictionary-lexical-services/Opl_DeOpl/blob/master/de_oplsfm.pl) in the same working directory, as well as the **AdjstHm.sh** file.
-
-(To run the sample data, copy these files into the **SampleData** folder.  Run the script as explained below.  Then compare the output files with the files that are in the **ExpectedOutput** folder there.)
+(To run the sample data, run the script as explained below.  Then compare the output files with the files that are in the **ExpectedOutput** folder there.)
 
 There are several steps to the process of running this script.  There are two ways to accomplish this.
 
@@ -30,7 +28,7 @@ Once the **INI** file has been edited and the main **AdjstHm.pl** script has the
 If you want to see the intermediate files and see how each part is called, first run a sequence of commands that flags any references in the file, so they won't be part of the calculations:
 
 ````bash
-./oplsfm.pl < InputSFM.db | ./FlagseReF.pl | ./de_oplsfm.pl > InputSFM-ref.db
+./FlagseReF.pl < InputSFM.db > InputSFM-ref.db
 ````
 
 Then use the output of that to run the script with default arguments:

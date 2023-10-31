@@ -68,9 +68,39 @@ say STDERR "record mark:$recmark" if $debug;
 say STDERR "REF flag:$REFflag" if $debug;
 say STDERR "subentry marks Match: $srchSEmarks" if $debug;
 say STDERR "date marks Match: $srchDTmarks" if $debug;
+
+# generate array of the input file with one SFM record per line (opl)
+my $eolrep = "#"; # character used to replace EOL
+my $reptag = "__hash__"; # tag to use in place of the EOL replacement character
+my @opledfile_in;
+my $line = ""; # accumulated SFM record
+my $crlf;
 while (<>) {
-    while (s/\\($srchSEmarks)( [^#]*#+\\$srchSEmarks )/\\$REFflag$1$2/) {} # trailed by another subentry
-    while (s/\\($srchSEmarks)( [^#]*#+\\$srchDTmarks( |#))/\\$REFflag$1$2/) {} # trailed by a date marker
-    while (s/\\($srchSEmarks)( [^#]*#+$)/\\$REFflag$1$2/) {} # at the end of the record
-		print;
+	$crlf = $MATCH if  s/\R//g;
+	s/$eolrep/$reptag/g;
+	$_ .= "$eolrep";
+	if (/^\\$recmark /) {
+		$line =~ s/$eolrep$/$crlf/;
+		push @opledfile_in, $line;
+		$line = $_;
+		}
+	else { $line .= $_ }
+	}
+push @opledfile_in, $line;
+
+say STDERR "opledfile_in:", Dumper(@opledfile_in) if $debug;
+
+for my $oplline (@opledfile_in) {
+	while ($oplline =~ s/\\($srchSEmarks)( [^#]*#+\\$srchSEmarks )/\\$REFflag$1$2/) {} # trailed by another subentry
+	while ($oplline =~ s/\\($srchSEmarks)( [^#]*#+\\$srchDTmarks( |#))/\\$REFflag$1$2/) {} # trailed by a date marker
+	while ($oplline =~ s/\\($srchSEmarks)( [^#]*#+$)/\\$REFflag$1$2/) {} # at the end of the record
+
+	say STDERR "oplline:", Dumper($oplline) if $debug;
+	#de_opl this line
+		for ($oplline) {
+			$crlf=$MATCH if /\R/;
+			s/$eolrep/$crlf/g;
+			s/$reptag/$eolrep/g;
+			print;
+			}
 }

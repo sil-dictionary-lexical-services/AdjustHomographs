@@ -29,7 +29,7 @@ echo "LogFile:$logfilename  ErrFile:$errfilename "
 echo "Modified:$outfilename"
 
 # Call the sequence of commands to run the operation
-./oplsfm.pl < $infilename | ./FlagseReF.pl | ./de_oplsfm.pl |tee $refdbname | ./AdjstHm.pl | perl -pE 's/^\\REF/\\/' >$outfilename
+./FlagseReF.pl < $infilename|tee $refdbname | ./AdjstHm.pl | perl -pE 's/^\\REF/\\/' >$outfilename
 
 # If the error file is empty, delete it
 if ! [ -s "AdjstHm-err.txt" ];then
