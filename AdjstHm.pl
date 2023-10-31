@@ -2,7 +2,7 @@
 
 my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section AdjstHm] [--logfile logfile.log] [--errfile errfile.err] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
 =pod
-This script checks for multiple instances of homographs and assigns homograph numbers to entries, subentries (complex forms) and variants that occur more than once.
+This script checks for multiple instances of homographs and assigns homograph numbers to entries, subentries (complex forms) and variants that occur more than once, and don't already have one.
 
 This script reads an ini file for The SFMs for:
 	* Record (e.g. \lx)
