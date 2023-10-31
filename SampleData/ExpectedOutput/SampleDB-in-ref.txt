@@ -1,0 +1,34 @@
+\_sh 400
+
+\lx blue
+\va bleu
+\nt This entry has an actual subentry.  It should be counted in subentry calculations.  The reference to a variant should not be counted.
+\sn 1
+\ge the color of the sky
+\se blueberry
+\ge a round blue fruit
+\dt 10/25/2023
+
+\lx blue
+\nt This entry has a reference to a subentry, not an actual subentry.  It should not be counted in hm calculations.
+\sn 1
+\ge sad
+\REFse black-and-blue
+\dt 10/25/2023
+
+\lx blueberry
+\sn 1
+\ge a girl in Willie Wonka's chocolate factory
+\dt 10/01/2023
+
+\lx black-and-blue
+\mn blue
+\nt This is the subentry that is referenced by blue/sad.  We don't expect the script to apply the new hm number for blue/color to this mn, though it would be nice if it could.
+\sn 1
+\ge all beat up
+\dt 10/24/2023
+
+\bleu
+\mn blue
+\nt This is the variant referenced by blue/color.  We don't expect the script to apply the new hm number for blue/color to it, though it would be nice if it could.
+
