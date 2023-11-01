@@ -3,7 +3,7 @@ my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--logfile lo
 =pod
 This script checks an opl'd file for subentries that are references.
 Reference subentries are those that have no subfields.
-It inserts a flag text into the SFM so that won't be matched in the AdjstHm script.
+It inserts a flag text into the SFM so that won't be matched in the AdjustHm script.
 I.e., the \se field is immediately followed by:
 	another se marker
 	a date marker
@@ -24,8 +24,8 @@ $USAGE =~ s/inifile\./$scriptname\./;
 
 use Getopt::Long;
 GetOptions (
-	'inifile:s'   => \(my $inifilename = "AdjstHm.ini"), # ini filename
-	'section:s'   => \(my $inisection = "AdjstHm"), # section of ini file to use
+	'inifile:s'   => \(my $inifilename = "AdjustHm.ini"), # ini filename
+	'section:s'   => \(my $inisection = "AdjustHm"), # section of ini file to use
 	'help'    => \my $help,
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),

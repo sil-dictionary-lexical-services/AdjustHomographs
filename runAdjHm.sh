@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # call this like:
-#    ./runAdjHm.sh infile.db outfile.db
+#    ./runAdjustHm.sh infile.db outfile.db
 
 # Collect input/output filenames from command line
 infilename=$1
@@ -11,10 +11,10 @@ if [ ! -f $infilename ] || [ -z $outfilename ]; then
 	exit
 	fi
 # The name of the main script, to use for constructing filenames
-scriptfilename="AdjstHm"
+scriptfilename="AdjustHm"
 # Construct ancillary filenames
 refdbname="${infilename%.*}-ref.txt" # create FlagRef filename
-# This is what the script AdjstHm.pl is currently doing:
+# This is what the script AdjustHm.pl is currently doing:
 logfilename="$scriptfilename-log.txt" # create Log filename
 errfilename="$scriptfilename-err.txt" # create Log filename
 ## If we want to construct the log/err files from the input filename
@@ -29,11 +29,11 @@ echo "LogFile:$logfilename  ErrFile:$errfilename "
 echo "Modified:$outfilename"
 
 # Call the sequence of commands to run the operation
-./FlagseReF.pl < $infilename|tee $refdbname | ./AdjstHm.pl | perl -pE 's/^\\REF/\\/' >$outfilename
+./FlagSeRef.pl < $infilename|tee $refdbname | ./AdjustHm.pl | perl -pE 's/^\\REF/\\/' >$outfilename
 
 # If the error file is empty, delete it
-if ! [ -s "AdjstHm-err.txt" ];then
-    #echo "Deleting empty Error file AdjstHm-err.txt"
-	rm AdjstHm-err.txt
+if ! [ -s "AdjustHm-err.txt" ];then
+    #echo "Deleting empty Error file AdjustHm-err.txt"
+	rm AdjustHm-err.txt
 fi
 

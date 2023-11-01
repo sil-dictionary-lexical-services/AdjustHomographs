@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section AdjstHm] [--logfile logfile.log] [--errfile errfile.err] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section AdjustHm] [--logfile logfile.log] [--errfile errfile.err] [--debug] [file.sfm]\nA script that assigns homograph numbers to un-numbered homographs in a Standard Format File lexical file.";
 =pod
 This script checks for multiple instances of homographs and assigns homograph numbers to entries, subentries (complex forms) and variants that occur more than once, and don't already have one.
 
@@ -59,7 +59,7 @@ write out the file
 
 
 The ini file should have sections with syntax like this:
-[AdjstHm]
+[AdjustHm]
 recmarks=lx
 semarks=se,sec,sed,sei,sep,sesec,sesed,sesep,seses
 vamarks=va,vap
@@ -85,7 +85,7 @@ $USAGE =~ s/logfile\./$scriptname\./;
 use Getopt::Long;
 GetOptions (
 	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
-	'section:s'   => \(my $inisection = "AdjstHm"), # section of ini file to use
+	'section:s'   => \(my $inisection = "AdjustHm"), # section of ini file to use
 	'errfile:s'   => \(my $errfilename = "$scriptname-err.txt"), # Error filename
 	'logfile:s'   => \(my $logfilename = "$scriptname-log.txt"), # log filename
 	'help'    => \my $help,

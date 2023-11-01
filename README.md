@@ -1,11 +1,11 @@
 # Adjust Homographs
 This repo contains a script to number homographs within an SFM (Standard Format Marker) lexicon file. It is a re-write of the DLS AddHomographs repo. A homograph pair are two words that are different words, but have the same spelling.
 
-The main script in this repo is **AdjstHm.pl.** It goes through various fields of an SFM looking for homographs. When it finds homographs, it notes any of the homographs that already have a number. It won't change any pre-existing numbers. Any homographs that aren't already numbered are assigned new numbers. They receive numbers greater than any numbers already assigned.
+The main script in this repo is **AdjustHm.pl.** It goes through various fields of an SFM looking for homographs. When it finds homographs, it notes any of the homographs that already have a number. It won't change any pre-existing numbers. Any homographs that aren't already numbered are assigned new numbers. They receive numbers greater than any numbers already assigned.
 
 ## Running the script
 
-Edit the .**INI** file to say which SFMs are used to mark records and fields that can contain homographs. A model **.INI** file, **AdjstHm.ini** is included with the repo and is explained below.
+Edit the .**INI** file to say which SFMs are used to mark records and fields that can contain homographs. A model **.INI** file, **AdjustHm.ini** is included with the repo and is explained below.
 
 If you use WSL, make sure the script has Linux line endings. The script will correctly read SFM and .INI files that have Windows line endings. The output file will contain Linux line endings.
 
@@ -17,10 +17,10 @@ There are several steps to the process of running this script.  There are two wa
 
 ### Option 1: Use the supplied shell script
 
-Once the **INI** file has been edited and the main **AdjstHm.pl** script has the correct line endings, and the needed utility scripts are in the working directory, run the whole sequence with this command:
+Once the **INI** file has been edited and the main **AdjustHm.pl** script has the correct line endings, and the needed utility scripts are in the working directory, run the whole sequence with this command:
 
 ````bash
-./runAdjHm.sh InputSFM.db OutputSFM.db
+./runAdjuHm.sh InputSFM.db OutputSFM.db
 ````
 
 ### Option 2: Run each step of the process manually
@@ -28,20 +28,20 @@ Once the **INI** file has been edited and the main **AdjstHm.pl** script has the
 If you want to see the intermediate files and see how each part is called, first run a sequence of commands that flags any references in the file, so they won't be part of the calculations:
 
 ````bash
-./FlagseReF.pl < InputSFM.db > InputSFM-ref.db
+./FlagSeRef.pl < InputSFM.db > InputSFM-ref.db
 ````
 
 Then use the output of that to run the script with default arguments:
 
 ````bash
-./AdjstHm.pl InputSFM-ref.db > OutputSFM.db
+./AdjustHm.pl InputSFM-ref.db > OutputSFM.db
 ````
 
 To see the possible arguments use the **--help** option:
 
 ````bash
-$ ./AdjstHm.pl --help
-Usage: ./AdjstHm.pl [--inifile AdjstHm.ini] [--section section] [--logfile AdjstHm-log.txt] [--errfile AdjstHm-err.txt] [--debug] [file.sfm]
+$ ./AdjustHm.pl --help
+Usage: ./AdjustHm.pl [--inifile AdjustHm.ini] [--section section] [--logfile AdjustHm-log.txt] [--errfile AdjistHm-err.txt] [--debug] [file.sfm]
 A script that assigns homograph numbers to un-numbered homographs in a Standard Format lexicon file.
 ````
 
@@ -104,7 +104,7 @@ You can see it was marked as homograph #10 of 'bore'.
 The .INI file (default **AdjustHm.ini**) specifies the SFMs of fields that are searched for homographs. Here is a sample:
 
 ````ini
-[AdjstHm]
+[AdjustHm]
 recmark=lx
 hmmark=hm
 semarks=se,sec,sed,sei,sep,sesec,sesed,sesep,seses
@@ -146,11 +146,11 @@ If the script detects that a homograph number has been assigned twice, It report
 
 ## Bugs & Possible Enhancements
 
-**AdjstHm.pl** doesn't detect missing homograph numbers. It starts assigning new numbers after the largest existing number. It doesn't check for gaps in the existing homograph numbering.
+**AdjustHm.pl** doesn't detect missing homograph numbers. It starts assigning new numbers after the largest existing number. It doesn't check for gaps in the existing homograph numbering.
 
-**AdjstHm.pl** doesn't detect duplicate assigned homograph numbers. It currently assumes that assigned homograph numbers are correct and doesn't change them.
+**AdjustHm.pl** doesn't detect duplicate assigned homograph numbers. It currently assumes that assigned homograph numbers are correct and doesn't change them.
 
-When an entry that receives a new hm number has references to other entries (e.g., \va or \se or any lexical relations) **AdjstHm.pl** doesn't follow the references and apply the new hm number to the back references in those entries.
+When an entry that receives a new hm number has references to other entries (e.g., \va or \se or any lexical relations) **AdjustHm.pl** doesn't follow the references and apply the new hm number to the back references in those entries.
 
 Other Bugs: probably, viz.
 
