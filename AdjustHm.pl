@@ -79,8 +79,8 @@ use Data::Dumper qw(Dumper);
 use File::Basename;
 my $scriptname = fileparse($0, qr/\.[^.]*/); # script name without the .pl
 $USAGE =~ s/inifile\./$scriptname\./;
-$USAGE =~ s/errfile\./$scriptname\./;
-$USAGE =~ s/logfile\./$scriptname\./;
+$USAGE =~ s/errfile\.err/$scriptname\-err.txt/;
+$USAGE =~ s/logfile\.log/$scriptname\-log.txt/;
 
 use Getopt::Long;
 GetOptions (
