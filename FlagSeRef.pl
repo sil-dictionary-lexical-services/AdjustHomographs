@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--logfile logfile.log] [--debug] [file.sfm]\nA script that checks an opl'd file for subentries that are references. Reference subentries are those that have no subfields.";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section AdjustHm] [--logfile logfile.log] [--debug] [file.sfm]\nA script that checks a file for subentries that are references. Reference subentries are those that have no subfields.";
 =pod
-This script checks an opl'd file for subentries that are references.
+This script checks a file for subentries that are references.
 Reference subentries are those that have no subfields.
 It inserts a flag text into the SFM so that won't be matched in the AdjustHm script.
 I.e., the \se field is immediately followed by:
@@ -21,6 +21,7 @@ use Data::Dumper qw(Dumper);
 use File::Basename;
 my $scriptname = fileparse($0, qr/\.[^.]*/); # script name without the .pl
 $USAGE =~ s/inifile\./$scriptname\./;
+$USAGE =~ s/logfile\.log/$scriptname\-log.txt/;
 
 use Getopt::Long;
 GetOptions (
