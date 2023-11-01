@@ -44,6 +44,13 @@ $ ./AdjustHm.pl --help
 Usage: ./AdjustHm.pl [--inifile AdjustHm.ini] [--section section] [--logfile AdjustHm-log.txt] [--errfile AdjistHm-err.txt] [--debug] [file.sfm]
 A script that assigns homograph numbers to un-numbered homographs in a Standard Format lexicon file.
 ````
+or
+````bash
+ ./FlagSeRef.pl --help
+Usage: ./FlagSeRef.pl [--inifile FlagSeRef.ini] [--section section] [--logfile logfile.log] [--debug] [file.sfm]
+A script that checks an opl'd file for subentries that are references. Reference subentries are those that have no subfields.
+
+````
 
 ## How homographs are marked
 
