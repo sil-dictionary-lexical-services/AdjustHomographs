@@ -20,7 +20,7 @@ There are several steps to the process of running this script.  There are two wa
 Once the **INI** file has been edited and the main **AdjustHm.pl** script has the correct line endings, and the needed utility scripts are in the working directory, run the whole sequence with this command:
 
 ````bash
-./runAdjuHm.sh InputSFM.db OutputSFM.db
+./runAdjustHm.sh InputSFM.db OutputSFM.db
 ````
 
 ### Option 2: Run each step of the process manually
