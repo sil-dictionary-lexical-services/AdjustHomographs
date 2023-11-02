@@ -13,7 +13,7 @@ if [ ! -f $infilename ] || [ -z $outfilename ]; then
 # The name of the main script, to use for constructing filenames
 scriptfilename="AdjustHm"
 # Construct ancillary filenames
-refdbname="${infilename%.*}-ref.txt" # create FlagRef filename
+refdbname="${infilename%.*}-ref.${infilename##*.}" # create FlagRef filename
 # This is what the script AdjustHm.pl is currently doing:
 logfilename="$scriptfilename-log.txt" # create Log filename
 errfilename="$scriptfilename-err.txt" # create Log filename
