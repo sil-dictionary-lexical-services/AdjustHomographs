@@ -3,13 +3,22 @@ This repo contains a script to number homographs within an SFM (Standard Format 
 
 The main script in this repo is **AdjustHm.pl.** It goes through various fields of an SFM looking for homographs. When it finds homographs, it notes any of the homographs that already have a number. It won't change any pre-existing numbers. Any homographs that aren't already numbered are assigned new numbers. They receive numbers greater than any numbers already assigned.
 
+## Files to download
+
+Download the following files:
+
+AdjustHm.pl
+AdjustHm.ini
+FlagSeRef.pl
+runAdjustHm.sh
+
 ## Running the script
 
 Edit the .**INI** file to say which SFMs are used to mark records and fields that can contain homographs. A model **.INI** file, **AdjustHm.ini** is included with the repo and is explained below.
 
 If you use WSL, make sure the script has Linux line endings. The script will correctly read SFM and .INI files that have Windows line endings. The output file will contain Linux line endings.
 
-It's easiest to copy the script, your **.INI** file, and your SFM file into a working directory and navigate to that. The instructions below assume that they are in the current directory.
+It's easiest to copy the scripts, your **.INI** file, and your SFM file into a working directory and navigate to that. The instructions below assume that they are in the current directory.
 
 (To run the sample data, run the script as explained below.  Then compare the output files with the files that are in the **ExpectedOutput** folder there.)
 
@@ -22,6 +31,8 @@ Once the **INI** file has been edited and the main **AdjustHm.pl** script has th
 ````bash
 ./runAdjustHm.sh InputSFM.db OutputSFM.db
 ````
+
+The file OutputSFM.db is your adjusted SFM file.  The file AdjustHm-log.txt provides a log of the changes that were made by the script.
 
 ### Option 2: Run each step of the process manually
 
@@ -115,7 +126,6 @@ The .INI file (default **AdjustHm.ini**) specifies the SFMs of fields that are s
 recmark=lx
 hmmark=hm
 semarks=se,sec,sed,sei,sep,sesec,sesed,sesep,seses
-vamarks=va,vap
 lcmark=lc
 ````
 
