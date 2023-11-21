@@ -7,10 +7,10 @@ The main script in this repo is **AdjustHm.pl.** It goes through various fields 
 
 Download the following files:
 
-AdjustHm.pl
-AdjustHm.ini
-FlagSeRef.pl
-runAdjustHm.sh
+ - AdjustHm.pl
+ - AdjustHm.ini
+ - FlagSeRef.pl
+ - runAdjustHm.sh
 
 ## Running the script
 
