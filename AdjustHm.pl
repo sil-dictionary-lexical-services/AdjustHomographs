@@ -163,14 +163,13 @@ while (<>) {
 		}
 	elsif (/^\\$hmmark (.*?)#/) {
 		my $hmval = $1;
-		if (! $hmval) {
+		if ( (! $hmval) || # 0 or null
+		  ($hmval !~ /^\d+$/) # test integer
+		  ) {
 			s/\\$hmmark/\\${hmmark}bad/;
-			say $ERRFILE "Bad homograph number (missing or 0), changing the SFM on line $.:$_";
+			say $ERRFILE qq (Bad homograph number "$hmval" (not a positive integer), changing the SFM on line $.:$_);
 			}
-		elsif (!($hmval =~  m/\d+/)) {
-			s/\\$hmmark/\\${hmmark}bad/;
-			say $ERRFILE "Bad homograph number (not a number), changing the SFM on line $.:$_";
-			}
+		}
 		 $line .= $_ ;
 		}
 	else { $line .= $_  }
