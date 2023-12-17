@@ -150,7 +150,6 @@ my @opledfile_in;
 my @recordindex;
 
 my $line = ""; # accumulated SFM record
-my $linecount = 0 ;
 while (<>) {
 	s/\R//g; # chomp that doesn't care about Linux & Windows
 	s/#/\_\_hash\_\_/g;
