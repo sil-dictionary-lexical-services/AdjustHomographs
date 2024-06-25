@@ -168,7 +168,6 @@ while (<>) {
 			s/\\$hmmark/\\${hmmark}bad/;
 			say $ERRFILE qq (Bad homograph number "$hmval" (not a positive integer), changing the SFM on line $.:$_);
 			}
-		}
 		 $line .= $_ ;
 		}
 	else { $line .= $_  }
