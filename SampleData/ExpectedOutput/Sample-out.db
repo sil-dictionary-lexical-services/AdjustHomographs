@@ -31,7 +31,7 @@
 \ge all beat up
 \dt 10/24/2023
 
-\bleu
+\lx bleu
 \mn blue
 \nt This is the variant referenced by blue/color.  We don't expect the script to apply the new hm number for blue/color to it, though it would be nice if it could.
 
