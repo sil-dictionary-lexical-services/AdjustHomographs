@@ -41,7 +41,8 @@ To parse \lx field for homograph
 		* $hmvalue = $3;
 To parse \se* fields for homograph
 	* \se word<n>#
-	* regex is /\\$srchSEmarks ([^#]+)([0-9]*
+	* regex is /\\$srchSEmarks ([^#]+)([0-9]*)
+		* It's done in two steps, first get the field contents and then find the homograph number if it exists
 
 To parse \va* for homograph
 	* same as \se
