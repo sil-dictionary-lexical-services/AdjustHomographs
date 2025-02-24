@@ -47,6 +47,8 @@ To parse \se* fields for homograph
 To parse \va* for homograph
 	* same as \se
 
+Increase the largest homograph numbers by the new homograph offset
+
 Assign unassigned numbers
 	grind through %hmcount hash
 		if current $hmcount > 1
@@ -112,12 +114,14 @@ use Config::Tiny;
 my $config = Config::Tiny->read($inifilename, 'crlf');
 my $recmark;
 my $hmmark;
+my $newhmoffset;
 my $srchSEmarks;
 my $srchVAmarks;
 my $lcmark;
 if ($config) {
 	$recmark = $config->{"$inisection"}->{recmark};
 	$hmmark = $config->{"$inisection"}->{hmmark};
+	$newhmoffset = $config->{"$inisection"}->{newhmoffset};
 	$lcmark = $config->{"$inisection"}->{lcmark};
 	my $semarks = $config->{"$inisection"}->{semarks};
 	my $vamarks = $config->{"$inisection"}->{vamarks};
@@ -137,6 +141,9 @@ if ($config) {
 	}
 else {
 	die  "Couldn't find the INI file: $inifilename\n";
+	}
+if ($newhmoffset !~ /^\d*$/) {
+	die "New homograph offset is not a number.\n"
 	}
 say STDERR "record mark:$recmark" if $debug;
 say STDERR "homograph mark:$hmmark" if $debug;
@@ -194,7 +201,7 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 	$oplline =~  m/(^\\$recmark ([^#]+)#)/;
 	say STDERR "lxfield: ", $1 if $debug;
 	my $form=$2;
-	if ($oplline =~  m/#(\\$lcmark ([^#]+)#)/) {
+	if ($oplline =~  m/#(\\$lcmark ([^#]+)#)/) { # if a citation line exist use it instead
 		$form=$2;
 		}
 	my $hmvalue="";
@@ -224,10 +231,14 @@ for (my $oplindex=0; $oplindex < $sizeopl; $oplindex++) {
 
 	}
 
+foreach my $form (keys %largesthm) {
+	$largesthm{$form} = $largesthm{$form} +$newhmoffset;
+	}
+
 foreach my $form (keys %hmcount) {
 	next if $hmcount{$form} == 1; # only one homograph leave it empty
 	my $newvalue = $UNASSIGNED;
-	my $newmax = 1;
+	my $newmax = 1+$newhmoffset;
 	$newmax = $largesthm{$form}+1 if exists $largesthm{$form};
 	while (exists $hmlocation{"$form\t$newvalue"}) {
 		my ($recno, $fieldno) = split (/\t/, $hmlocation{"$form\t$newvalue"});

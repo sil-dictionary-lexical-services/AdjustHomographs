@@ -116,6 +116,7 @@ After running the script, the subentry would have a homograph number, like this:
 ````
 
 You can see it was marked as homograph #10 of 'bore'.
+If the *newhmoffset* variable is defined in the INI file, it will be added to the new value.
 
 ## Which fields are searched for homographs?
 
@@ -160,6 +161,13 @@ If the entry has a citation form (e.g., **\lc**), that form is used instead of t
 The script detects homograph fields that are invalid (because they don't have a number) or contain a homograph number greater than 90000. It logs them to the log file. Line numbers in the log file refer to the line number in the input file, which may be different from the output file.
 
 If the script detects that a homograph number has been assigned twice, It reports the form and line number of the two occurrences. Note that in the case of a lexical form or a citation form, the form and the homograph field will be on different lines.
+
+## Additional variables in the INI file
+There are some additional variables added to the INI file.
+ - **newhmoffset** is a number added to the new homograph numbers. Can be used to easily distinguish newly assigned numbers  from old numbers.
+ - **REFflag** is added to subentry markers to indicate that this is just a reference to a sub-entry rather than a new sub-entry.
+ The subentry field will then be ignored by the *AdjistHm* script.
+  - **dtmarks** indicates a date field and as such will mark the end of a sub-entry reference.
 
 ## Bugs & Possible Enhancements
 
