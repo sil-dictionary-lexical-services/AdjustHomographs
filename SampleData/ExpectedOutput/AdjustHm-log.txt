@@ -1,4 +1,6 @@
-Record #1 (blue) now has a new homograph field \hm 1
-Record #2 (blue) now has a new homograph field \hm 2
-Record #1 (blue__hm__1) Field #6 (blueberry1) now has a homograph number
-Record #3 (blueberry) now has a new homograph field \hm 2
+Record #1 (blue) Field #6 (blueberry101) now has a homograph number
+Record #3 (blueberry) now has a new homograph field \hm 102
+Record #1 (blue) now has a new homograph field \hm 101
+Record #2 (blue) now has a new homograph field \hm 102
+Record #1 (blue__hm__101) Field #2 (bleu101) now has a homograph number
+Record #5 (bleu) now has a new homograph field \hm 102
